@@ -1,11 +1,24 @@
 const path = require('path');
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 module.exports = {
-    entry: './src/index.js', // Source js file to webpack bunch
+    entry: {
+        main: ['./src/index.js', './src/test.js'],
+    }, // Source js file to webpack bunch
     output: {
-        filename: "newMain.js", // Name default is main.js
-        path: path.resolve(__dirname, 'dist')
+        filename: "[name].js", // Name default is main.js
+        path: path.resolve(__dirname, 'dist'),
+        clean: true
+    },
+    devServer: {
+        contentBase: './dist'
     },
     mode: "development",
-    watch: false
+    watch: false,
+    devtool: 'inline-source-map', // Easy debug which error in js file | mode: development as same
+    plugins: [
+        // new CleanWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            title: 'KAY KAFE'
+        })]
 }
