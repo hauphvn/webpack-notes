@@ -13,14 +13,28 @@ module.exports = {
         clean: true
     },
     optimization: {
-      splitChunks: {
-          chunks: "all"
-      }
+        splitChunks: {
+            chunks: "all"
+        }
+    },
+    module: {
+        rules: [
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            }
+        ]
     },
     devServer: {
         static: './dist',
         port: 8081,
-        open: true
+        open: false
     },
     mode: "development",
     watch: false,
